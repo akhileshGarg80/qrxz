@@ -1,0 +1,6 @@
+{
+  "name": "Gulab Forms & Scan QR Studio",
+  "description": "Generate printable floral QR standees that direct scanners straight to a stunning rose-themed interactive form with local storage response management.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
