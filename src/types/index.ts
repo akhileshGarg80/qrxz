@@ -1,34 +1,29 @@
-export type ViewMode = 'form' | 'qr-studio' | 'submissions';
+export type ViewMode = 'form' | 'submissions';
 
-export type RoseColorMood = 
-  | 'red-rose'       // Love & Respect (गहरा प्रेम व आदर)
-  | 'pink-rose'      // Gratitude & Grace (कृतज्ञता व स्नेह)
-  | 'white-rose'     // Purity & Peace (शांति व पावनता)
-  | 'yellow-rose'    // Joy & Friendship (उमंग व मित्रता)
-  | 'lavender-rose'; // Elegance & Charm (जादुई आकर्षण)
+export type CourseType = 
+  | 'PGDCA'
+  | 'DCA'
+  | 'CPCT'
+  | 'TALLY_GST'
+  | 'BASIC_COMPUTER'
+  | 'DTP_GRAPHICS'
+  | 'OTHER';
 
-export interface FormSubmission {
+export interface StudentRegistration {
   id: string;
-  fullName: string;
-  contact: string;
-  category: 'feedback' | 'inquiry' | 'greeting' | 'event' | 'complaint' | 'other';
-  roseMood: RoseColorMood;
-  roseRating: number; // 1 to 5
-  message: string;
-  specialDate?: string;
-  favoriteFlower?: string;
-  submittedAt: string;
   tokenNumber: string;
-  source: 'qr_scan' | 'direct_link' | 'web';
+  fullName: string;
+  fatherName?: string;
+  mobile: string;
+  gmail: string;
+  address: string;
+  course: CourseType;
+  customCourse?: string;
+  qualification: string;
+  message?: string;
+  submittedAt: string;
 }
 
-export interface QRStandeeConfig {
-  title: string;
-  tagline: string;
-  instruction: string;
-  theme: 'royal-rose' | 'velvet-crimson' | 'champagne-gold' | 'midnight-noir' | 'botanical-sage';
-  size: 'standee' | 'badge' | 'flyer' | 'tent-card';
-  logoIcon: 'rose' | 'heart' | 'sparkle' | 'gift';
-  includeInstructions: boolean;
-  borderStyle: 'ornate' | 'minimal' | 'vintage' | 'double';
-}
+export const INSTITUTE_WHATSAPP_NUMBER = '9303616654';
+export const INSTITUTE_NAME = 'कृष्ण कंप्यूटर नागोद';
+export const INSTITUTE_SUBTITLE = 'Krishan Computer Institute, Nagod (M.P.)';

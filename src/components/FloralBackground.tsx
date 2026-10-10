@@ -5,42 +5,51 @@ interface FloralBackgroundProps {
 }
 
 export const FloralBackground: React.FC<FloralBackgroundProps> = ({ showPetals = true }) => {
-  // Generate stable random petals
+  // Diverse attractive flowers (marigold/गेंदा, rose/गुलाब, lotus/कमल petals)
   const petals = useMemo(() => {
-    return Array.from({ length: 18 }).map((_, i) => {
-      const left = Math.floor(Math.random() * 96) + 2; // 2% to 98%
-      const duration = 7 + (i % 7) * 2; // 7s to 19s
-      const delay = (i * 0.9) % 10;
-      const size = 16 + (i % 5) * 6; // 16px to 40px
-      const opacity = 0.45 + (i % 4) * 0.12;
-      const rotation = (i * 47) % 360;
-      const color = i % 3 === 0 ? '#e11d48' : i % 3 === 1 ? '#fb7185' : '#f43f5e';
-      return { id: i, left, duration, delay, size, opacity, rotation, color };
+    return Array.from({ length: 14 }).map((_, i) => {
+      const left = Math.floor(Math.random() * 92) + 4;
+      const duration = 10 + (i % 5) * 3;
+      const delay = (i * 1.2) % 10;
+      const size = 20 + (i % 4) * 6;
+      const rotation = (i * 61) % 360;
+      // Vibrant flower colors: marigold orange, golden yellow, rose pink, royal crimson
+      const flowerType = i % 3; // 0 = marigold petal, 1 = rose, 2 = lotus pink
+      const color = flowerType === 0 ? '#f59e0b' : flowerType === 1 ? '#e11d48' : '#ec4899';
+      return { id: i, left, duration, delay, size, rotation, color, flowerType };
     });
   }, []);
 
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-      {/* Soft warm floral ambient gradient */}
-      <div className="absolute inset-0 bg-radial from-rose-100/40 via-rose-50/30 to-amber-50/20" />
+      {/* Soft warm festive gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#fffbeb] via-[#fff1f2]/60 to-[#fdf4ff]" />
 
-      {/* Decorative Ornate Rose Border Accents */}
-      <div className="absolute -top-16 -left-16 w-64 h-64 opacity-25 text-rose-500 blur-[0.5px]">
+      {/* Decorative Ornate Floral Corner Vines */}
+      <div className="absolute -top-16 -left-16 w-64 h-64 opacity-25 text-amber-500 blur-[0.5px]">
         <svg viewBox="0 0 200 200" fill="currentColor">
-          <path d="M40 0 C70 40, 20 80, 50 110 C80 140, 40 180, 0 200 C0 100, 0 50, 40 0 Z" />
-          <circle cx="90" cy="50" r="18" fill="#fda4af" opacity="0.6" />
-          <circle cx="120" cy="90" r="14" fill="#fb7185" opacity="0.5" />
+          <circle cx="60" cy="60" r="35" fill="#f59e0b" />
+          <circle cx="100" cy="40" r="25" fill="#e11d48" />
+          <circle cx="40" cy="100" r="25" fill="#ec4899" />
         </svg>
       </div>
 
-      <div className="absolute -bottom-20 -right-20 w-80 h-80 opacity-20 text-rose-600 blur-[0.5px]">
+      <div className="absolute -top-16 -right-16 w-64 h-64 opacity-25 text-rose-500 blur-[0.5px]">
         <svg viewBox="0 0 200 200" fill="currentColor">
-          <circle cx="100" cy="100" r="70" fill="#f43f5e" opacity="0.3" />
-          <path d="M100 20 C120 70, 180 80, 150 130 C120 180, 80 150, 40 170 C20 120, 60 80, 100 20 Z" />
+          <circle cx="140" cy="60" r="35" fill="#e11d48" />
+          <circle cx="100" cy="40" r="25" fill="#f59e0b" />
+          <circle cx="160" cy="100" r="25" fill="#ec4899" />
         </svg>
       </div>
 
-      {/* Floating Rose Petals */}
+      <div className="absolute -bottom-20 -right-20 w-72 h-72 opacity-20 text-pink-500 blur-[0.5px]">
+        <svg viewBox="0 0 200 200" fill="currentColor">
+          <circle cx="120" cy="120" r="50" fill="#f43f5e" />
+          <circle cx="80" cy="140" r="40" fill="#fbbf24" />
+        </svg>
+      </div>
+
+      {/* Drifting Flower Petals */}
       {showPetals && (
         <div className="absolute inset-0">
           {petals.map((p) => (
@@ -49,39 +58,31 @@ export const FloralBackground: React.FC<FloralBackgroundProps> = ({ showPetals =
               className="floating-petal"
               style={{
                 left: `${p.left}%`,
-                top: '-40px',
+                top: '-35px',
                 animationDuration: `${p.duration}s`,
                 animationDelay: `${p.delay}s`,
                 width: `${p.size}px`,
                 height: `${p.size * 1.3}px`,
-                opacity: p.opacity,
+                opacity: 0.55,
               }}
             >
-              {/* Detailed SVG Rose Petal */}
               <svg
                 viewBox="0 0 32 40"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-                className="w-full h-full drop-shadow-sm filter"
+                className="w-full h-full drop-shadow-xs"
                 style={{ transform: `rotate(${p.rotation}deg)` }}
               >
                 <path
                   d="M16 2C24 6 30 16 28 26C26 34 20 38 16 38C12 38 6 34 4 26C2 16 8 6 16 2Z"
                   fill={p.color}
                 />
-                {/* Petal Inner Vein / Shading */}
                 <path
                   d="M16 6C19 12 21 22 17 32"
                   stroke="#ffffff"
                   strokeWidth="1.2"
-                  strokeOpacity="0.4"
+                  strokeOpacity="0.6"
                   strokeLinecap="round"
-                />
-                <path
-                  d="M14 10C10 16 8 22 13 30"
-                  stroke="#be123c"
-                  strokeWidth="0.8"
-                  strokeOpacity="0.3"
                 />
               </svg>
             </div>
